@@ -1,0 +1,65 @@
+@import "/vars";
+
+// FONT PATH //
+$gilroyBold: "/fonts/gilroy-extrabold.woff";
+$gingerproReg: "/fonts/f37gingerpro-regular-webfont.woff";
+$gingerproLight: "/fonts/f37gingerpro-light-webfont.woff";
+$gingerproBold: "/fonts/f37gingerpro-bold-webfont.woff";
+
+@font-face {
+	font-family: "gilroy";
+	src: url($gilroyBold) format("woff");
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "gingerpro-reg";
+	src: url($gingerproReg) format("woff");
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "gingerpro-light";
+	src: url($gingerproLight) format("woff");
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "gingerpro-bold";
+	src: url($gingerproBold) format("woff");
+	font-display: swap;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+	margin: 0;
+	color: $primaryBlack;
+}
+
+h1 {
+	font-size: 32px;
+	font-family: gilroy;
+}
+
+h2 {
+	font-size: 24px;
+	font-family: gilroy;
+}
+
+h3 {
+	font-size: 20px;
+	font-family: gilroy;
+}
+
+h4 {
+	font-size: 16px;
+	font-family: gilroy;
+}
+
+p {
+	font-size: 16px;
+	font-family: gingerpro-reg;
+}
