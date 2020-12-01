@@ -7,9 +7,9 @@ import "./App.scss";
 function App() {
 	const [facts, setFacts] = useState([]);
 	useEffect(() => {
-		get(setFacts);
+		get("https://foobar-data.herokuapp.com/", setFacts);
 		const interval = setInterval(() => {
-			get(setFacts);
+			get("https://foobar-data.herokuapp.com/", setFacts);
 		}, 2000);
 		return () => clearInterval(interval);
 	}, []);
