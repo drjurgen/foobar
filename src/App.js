@@ -1,10 +1,19 @@
-import logo from './logo.svg';
-import './App.scss';
+import React, { useState, useEffect } from "react";
+
+import { get } from "./modules/rest";
+
+import Main from "./components/Main";
+import "./App.scss";
 
 function App() {
+  const [facts, setFacts] = useState([]);
+  useEffect(() => {
+    get(setFacts);
+  }, []);
+
   return (
     <div className="App">
-      <p>yo</p>
+      <Main facts={facts}></Main>
     </div>
   );
 }
