@@ -1,28 +1,26 @@
-import React, { useState, useEffect } from "react";
-
-import { get } from "./modules/rest";
-
-import "./App.scss";
+import React, { useState, useEffect } from "react"; // import React
+import Header from "./components/Header"; // import Header component
+import Main from "./components/Main"; // import Main component
+import { get } from "./modules/rest"; // import REST operations
+import "./App.scss"; // import SASS
 
 function App() {
 	const [facts, setFacts] = useState([]);
+	const [beerTypes, setBeerTypes] = useState([]);
 	useEffect(() => {
-		get("https://foobar-data.herokuapp.com/", setFacts);
+		// get("https://foobar-data.herokuapp.com/", setFacts);
+		get("https://foobar-data.herokuapp.com/beertypes", setBeerTypes);
 		const interval = setInterval(() => {
 			get("https://foobar-data.herokuapp.com/", setFacts);
 		}, 2000);
 		return () => clearInterval(interval);
 	}, []);
-	console.log(facts);
+	// console.log(facts);
+	// console.log(beerTypes);
 	return (
 		<div className="App">
-			{facts.bar !== undefined ? (
-				<div>
-					<h1>{facts.bar.name}</h1>
-					<p>{facts.bartenders[0].name}</p>
-					<p>{facts.bartenders[0].statusDetail}</p>
-				</div>
-			) : null}
+			<Header />
+			<Main facts={facts} beerTypes={beerTypes} />
 		</div>
 	);
 }

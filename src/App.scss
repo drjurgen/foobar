@@ -1,2 +1,8 @@
+// used throughout the app
+@import "/partials/global";
 @import "/partials/vars";
 @import "/partials/text";
+
+// component specific
+@import "/partials/components/header";
+@import "/partials/components/beer";
