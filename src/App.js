@@ -7,6 +7,7 @@ import "./App.scss"; // import SASS
 function App() {
 	const [facts, setFacts] = useState([]);
 	const [beerTypes, setBeerTypes] = useState([]);
+
 	useEffect(() => {
 		// get("https://foobar-data.herokuapp.com/", setFacts);
 		get("https://foobar-data.herokuapp.com/beertypes", setBeerTypes);
@@ -15,8 +16,7 @@ function App() {
 		}, 2000);
 		return () => clearInterval(interval);
 	}, []);
-	// console.log(facts);
-	// console.log(beerTypes);
+
 	return (
 		<div className="App">
 			<Header />

@@ -1,9 +1,13 @@
 import React from "react"; // import React
 
-export function Beer({ facts, beerInfo }) {
+export function Beer({ facts, beerInfo, showBeer }) {
 	const beerImg = {
 		backgroundImage: `url(https://carlsbergdanmark.dk/media/39506/1664_blanc_bottle_wcap_wet_lowres.png)`,
 	};
+
+	function passToMain() {
+		showBeer(beerInfo);
+	}
 
 	return (
 		<article className="beer">
@@ -18,7 +22,9 @@ export function Beer({ facts, beerInfo }) {
 
 				<div className="beer-desc">
 					<p>{beerInfo.description.overallImpression}</p>
-					<button className="read-more">Read more</button>
+					<button className="read-more" onClick={passToMain}>
+						Read more
+					</button>
 				</div>
 
 				<div className="add-to-cart">
