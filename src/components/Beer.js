@@ -1,12 +1,56 @@
-import React from "react"; // import React
+import React, { useState } from "react"; // import React
 
-export function Beer({ facts, beerInfo, showBeer }) {
+export function Beer({ beerInfo, showBeer, order, setOrder }) {
 	const beerImg = {
 		backgroundImage: `url(https://carlsbergdanmark.dk/media/39506/1664_blanc_bottle_wcap_wet_lowres.png)`,
 	};
 
+	const [orderAmount, setAmount] = useState(1);
+
 	function passToMain() {
 		showBeer(beerInfo);
+	}
+
+	// add beer to cart
+	function addToCart() {
+		if (orderAmount > 0) {
+			// prevent adding "0" amount of beers to cart
+			const addBeers = {
+				name: beerInfo.name,
+				amount: orderAmount,
+			};
+			order.totalPrice += orderAmount * beerInfo.price;
+
+			// check if beer is already in cart and adjust order
+			if (order.beers.find((beer) => beer.name === beerInfo.name)) {
+				const beerExist = order.beers.find((beer) => beer.name === beerInfo.name);
+				console.log(beerExist);
+				beerExist.amount += orderAmount;
+			} else {
+				order.beers.push(addBeers);
+			}
+
+			setOrder(order); // call setOrder function in App-component
+			setAmount(1);
+		}
+	}
+
+	// +1 to order amount
+	function plusAmount() {
+		setAmount(orderAmount + 1);
+	}
+
+	// -1 to order amount
+	function minusAmount() {
+		if (orderAmount > 0) {
+			setAmount(orderAmount - 1);
+		}
+	}
+
+	// set order amount to number typed
+	function inputAmount(event) {
+		console.log(event.target.value);
+		setAmount(event.target.value);
 	}
 
 	return (
@@ -16,7 +60,7 @@ export function Beer({ facts, beerInfo, showBeer }) {
 			<div className="beer-info">
 				<h3>{beerInfo.name}</h3>
 				<div className="beer-type">
-					<h3>30 DKK</h3>
+					<h3>{beerInfo.price} DKK</h3>
 					<p>{beerInfo.category}</p>
 				</div>
 
@@ -29,12 +73,12 @@ export function Beer({ facts, beerInfo, showBeer }) {
 
 				<div className="add-to-cart">
 					<div className="beer-amount">
-						<input type="number" placeholder="1" min="0" />
-						<button className="minus"></button>
-						<button className="plus"></button>
+						<input type="number" min="0" value={orderAmount} onInput={inputAmount} />
+						<button className="minus" onClick={minusAmount}></button>
+						<button className="plus" onClick={plusAmount}></button>
 					</div>
 
-					<button className="add"></button>
+					<button className="add" onClick={addToCart}></button>
 				</div>
 			</div>
 		</article>

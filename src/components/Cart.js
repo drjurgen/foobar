@@ -1,21 +1,31 @@
 import React from "react"; // import React
+import CartItem from "./CartItem"; // import Cart
 
-export default function Cart() {
+export default function CartList({ order, setOrder }) {
 	return (
-		<div className="background-container">
-			<div className="mini-cart-container">
-				<div className="cart-info">
-					<div className="current-order">
-						<h3>Current order</h3>
-						<h3>?? DKK</h3>
-					</div>
-					<p>up to three beers shown here...</p>
+		<section className="cart-inner">
+			{order.beers.length === 0 ? (
+				<div>
+					<p>No items in cart</p>
 				</div>
+			) : (
+				order.beers.map((beer) => {
+					return <CartItem key={beer.name} beer={beer} order={order} setOrder={setOrder} />;
+				})
+			)}
 
-				<div className="open-cart">
-					<button className="open-cart-btn"></button>
-				</div>
-			</div>
-		</div>
+			<article className="cart-total">
+				<h3>Total</h3>
+				<h3>{order.totalPrice} DKK</h3>
+			</article>
+
+			{order.beers.length === 0 ? (
+				<button className="proceed" disabled>
+					cannot proceed
+				</button>
+			) : (
+				<button className="proceed">proceed</button>
+			)}
+		</section>
 	);
 }

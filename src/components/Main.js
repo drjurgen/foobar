@@ -1,10 +1,10 @@
 import React, { useState } from "react"; // import React
 import Preload from "./Preload"; // import Preload component
 import BeerList from "./BeerList"; // import Preload component
-import Cart from "./Cart"; // import Preload component
+import CartContainer from "./CartContainer"; // import Preload component
 import SingleView from "./SingleView"; // import Preload component
 
-export default function Main({ facts, beerTypes }) {
+export default function Main({ facts, beerTypes, order, setOrder }) {
 	const [showSingleBeer, setShowBeer] = useState(false);
 	const [singleBeerInfo, setBeerInfo] = useState();
 
@@ -21,9 +21,11 @@ export default function Main({ facts, beerTypes }) {
 		<main style={{ marginBottom: "65px" }}>
 			{facts.bar !== undefined && beerTypes !== [] ? (
 				<>
-					<BeerList facts={facts} beerTypes={beerTypes} showBeer={showBeer} />
-					<Cart />
-					{showSingleBeer ? <SingleView showBeer={showBeer} info={singleBeerInfo} /> : null}
+					<BeerList facts={facts} beerTypes={beerTypes} showBeer={showBeer} order={order} setOrder={setOrder} />
+					<CartContainer order={order} setOrder={setOrder} />
+					{showSingleBeer ? (
+						<SingleView showBeer={showBeer} info={singleBeerInfo} order={order} setOrder={setOrder} />
+					) : null}
 				</>
 			) : (
 				<Preload />

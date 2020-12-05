@@ -1,6 +1,51 @@
-import React from "react"; // import React
+import React, { useState } from "react"; // import React
 
-export default function SingleView({ showBeer, info }) {
+export default function SingleView({ showBeer, info, order, setOrder }) {
+	const [orderAmount, setAmount] = useState(1);
+
+	// add beer to cart
+	function addToCart() {
+		if (orderAmount > 0) {
+			// prevent adding "0" amount of beers to cart
+			const addBeers = {
+				name: info.name,
+				amount: orderAmount,
+			};
+			order.totalPrice += orderAmount * info.price;
+
+			// check if beer is already in cart and adjust order
+			if (order.beers.find((beer) => beer.name === info.name)) {
+				const beerExist = order.beers.find((beer) => beer.name === info.name);
+				console.log(beerExist);
+				beerExist.amount += orderAmount;
+			} else {
+				order.beers.push(addBeers);
+			}
+
+			setOrder(order); // call setOrder function in App-component
+			setAmount(1);
+			showBeer();
+		}
+	}
+
+	// +1 to order amount
+	function plusAmount() {
+		setAmount(orderAmount + 1);
+	}
+
+	// -1 to order amount
+	function minusAmount() {
+		if (orderAmount > 0) {
+			setAmount(orderAmount - 1);
+		}
+	}
+
+	// set order amount to number typed
+	function inputAmount(event) {
+		console.log(event.target.value);
+		setAmount(event.target.value);
+	}
+
 	return (
 		<section className="singleview-bg show-singleview">
 			<article className="singleview-container">
@@ -24,12 +69,12 @@ export default function SingleView({ showBeer, info }) {
 
 				<div className="add-to-cart">
 					<div className="beer-amount">
-						<input type="number" placeholder="1" min="0" />
-						<button className="minus"></button>
-						<button className="plus"></button>
+						<input type="number" min="0" value={orderAmount} onInput={inputAmount} />
+						<button className="minus" onClick={minusAmount}></button>
+						<button className="plus" onClick={plusAmount}></button>
 					</div>
 
-					<button className="add"></button>
+					<button className="add" onClick={addToCart}></button>
 				</div>
 
 				<button onClick={showBeer} className="close-singleview"></button>

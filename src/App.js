@@ -7,10 +7,29 @@ import "./App.scss"; // import SASS
 function App() {
 	const [facts, setFacts] = useState([]);
 	const [beerTypes, setBeerTypes] = useState([]);
+	const [order, setOrder] = useState({
+		totalPrice: 0,
+		beers: [],
+	});
+
+	function setOrderState(order) {
+		setOrder(order);
+	}
 
 	useEffect(() => {
 		// get("https://foobar-data.herokuapp.com/", setFacts);
-		get("https://foobar-data.herokuapp.com/beertypes", setBeerTypes);
+		get("https://foobar-data.herokuapp.com/beertypes", setBeerPrice);
+
+		function setBeerPrice(data) {
+			data.forEach((beer) => {
+				Object.defineProperty(beer, "price", {
+					value: 30,
+					writable: true,
+				});
+			});
+			setBeerTypes(data);
+		}
+
 		const interval = setInterval(() => {
 			get("https://foobar-data.herokuapp.com/", setFacts);
 		}, 2000);
@@ -20,7 +39,7 @@ function App() {
 	return (
 		<div className="App">
 			<Header />
-			<Main facts={facts} beerTypes={beerTypes} />
+			<Main facts={facts} beerTypes={beerTypes} order={order} setOrder={setOrderState} />
 		</div>
 	);
 }

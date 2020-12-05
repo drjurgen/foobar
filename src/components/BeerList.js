@@ -1,7 +1,7 @@
 import React from "react"; // import React
 import { Beer, NotAvailable } from "./Beer"; // import Beer and NotAvailable components
 
-export default function BeerList({ facts, beerTypes, showBeer }) {
+export default function BeerList({ facts, beerTypes, showBeer, order, setOrder }) {
 	const available = [];
 	const notAvailable = [];
 
@@ -32,7 +32,9 @@ export default function BeerList({ facts, beerTypes, showBeer }) {
 	return (
 		<section>
 			{available.map((beer) => {
-				return <Beer key={beer.label} beerInfo={beer} facts={facts} showBeer={showBeer} />; // available beer should use this component
+				return (
+					<Beer key={beer.label} beerInfo={beer} facts={facts} showBeer={showBeer} order={order} setOrder={setOrder} />
+				); // available beer should use this component
 			})}
 
 			{notAvailable.map((beer) => {
