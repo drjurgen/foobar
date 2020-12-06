@@ -2,6 +2,7 @@ import React, { useState } from "react"; // import React
 
 export default function SingleView({ showBeer, info, order, setOrder }) {
 	const [orderAmount, setAmount] = useState(1);
+	const orderState = { ...order };
 
 	// add beer to cart
 	function addToCart() {
@@ -11,18 +12,18 @@ export default function SingleView({ showBeer, info, order, setOrder }) {
 				name: info.name,
 				amount: orderAmount,
 			};
-			order.totalPrice += orderAmount * info.price;
+			orderState.totalPrice += orderAmount * info.price;
 
 			// check if beer is already in cart and adjust order
-			if (order.beers.find((beer) => beer.name === info.name)) {
-				const beerExist = order.beers.find((beer) => beer.name === info.name);
+			if (orderState.beers.find((beer) => beer.name === info.name)) {
+				const beerExist = orderState.beers.find((beer) => beer.name === info.name);
 				console.log(beerExist);
 				beerExist.amount += orderAmount;
 			} else {
-				order.beers.push(addBeers);
+				orderState.beers.push(addBeers);
 			}
 
-			setOrder(order); // call setOrder function in App-component
+			setOrder(orderState); // call setOrder function in App-component
 			setAmount(1);
 			showBeer();
 		}

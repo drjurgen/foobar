@@ -2,6 +2,11 @@ import React from "react"; // import React
 import CartItem from "./CartItem"; // import Cart
 
 export default function CartList({ order, setOrder }) {
+	function deleteItem(name) {
+		order.beers = order.beers.filter((item) => item.name !== name);
+		setOrder(order);
+	}
+
 	return (
 		<section className="cart-inner">
 			{order.beers.length === 0 ? (
@@ -10,7 +15,7 @@ export default function CartList({ order, setOrder }) {
 				</div>
 			) : (
 				order.beers.map((beer) => {
-					return <CartItem key={beer.name} beer={beer} order={order} setOrder={setOrder} />;
+					return <CartItem key={beer.name} beer={beer} order={order} setOrder={setOrder} deleteItem={deleteItem} />;
 				})
 			)}
 

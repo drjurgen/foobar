@@ -1,6 +1,8 @@
 import React, { useState } from "react"; // import React
 
 export function Beer({ beerInfo, showBeer, order, setOrder }) {
+	const orderState = { ...order };
+
 	const beerImg = {
 		backgroundImage: `url(https://carlsbergdanmark.dk/media/39506/1664_blanc_bottle_wcap_wet_lowres.png)`,
 	};
@@ -19,18 +21,18 @@ export function Beer({ beerInfo, showBeer, order, setOrder }) {
 				name: beerInfo.name,
 				amount: orderAmount,
 			};
-			order.totalPrice += orderAmount * beerInfo.price;
+			orderState.totalPrice += orderAmount * beerInfo.price;
 
 			// check if beer is already in cart and adjust order
-			if (order.beers.find((beer) => beer.name === beerInfo.name)) {
-				const beerExist = order.beers.find((beer) => beer.name === beerInfo.name);
-				console.log(beerExist);
+			if (orderState.beers.find((beer) => beer.name === beerInfo.name)) {
+				const beerExist = orderState.beers.find((beer) => beer.name === beerInfo.name);
 				beerExist.amount += orderAmount;
+				console.log(beerExist);
 			} else {
-				order.beers.push(addBeers);
+				orderState.beers.push(addBeers);
 			}
 
-			setOrder(order); // call setOrder function in App-component
+			setOrder(orderState); // call setOrder function in App-component
 			setAmount(1);
 		}
 	}

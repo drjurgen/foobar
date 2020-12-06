@@ -14,12 +14,12 @@ function App() {
 
 	function setOrderState(order) {
 		setOrder(order);
+		console.log(order);
 	}
 
 	useEffect(() => {
 		// get("https://foobar-data.herokuapp.com/", setFacts);
 		get("https://foobar-data.herokuapp.com/beertypes", setBeerPrice);
-
 		function setBeerPrice(data) {
 			data.forEach((beer) => {
 				Object.defineProperty(beer, "price", {
@@ -30,10 +30,10 @@ function App() {
 			setBeerTypes(data);
 		}
 
-		const interval = setInterval(() => {
+		const fetchInterval = setInterval(() => {
 			get("https://foobar-data.herokuapp.com/", setFacts);
 		}, 2000);
-		return () => clearInterval(interval);
+		return () => clearInterval(fetchInterval);
 	}, []);
 
 	return (
