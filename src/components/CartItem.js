@@ -12,7 +12,6 @@ export default function CartItem({ beer, order, setOrder, deleteItem }) {
 			cartPrice += beer.amount * 30;
 		});
 		orderState.totalPrice = cartPrice;
-		console.log(cartPrice);
 		updateOrder();
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -38,6 +37,7 @@ export default function CartItem({ beer, order, setOrder, deleteItem }) {
 		}
 	}
 
+	// delete item from order
 	function deleteCartItem() {
 		setAmount(0);
 		deleteItem(beer.name);

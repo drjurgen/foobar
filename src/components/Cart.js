@@ -26,7 +26,7 @@ export default function CartList({ order, setOrder }) {
 
 			{order.beers.length === 0 ? (
 				<button className="proceed" disabled>
-					cannot proceed
+					proceed
 				</button>
 			) : (
 				<button className="proceed">proceed</button>
