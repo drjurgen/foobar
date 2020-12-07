@@ -1,9 +1,16 @@
 import React, { useState } from "react"; // import React
 import CartList from "./Cart"; // import Cart
 import CartStatus from "./CartStatus"; // import Cart
+import Account from "./Account"; // import Account
+import Payment from "./Payment"; // import Payment
 
 export default function CartContainer({ order, setOrder }) {
 	const [openCart, setCartStatus] = useState(false);
+	const [cartStage, setCartStage] = useState("current order");
+
+	function setStage(value) {
+		setCartStage(value);
+	}
 
 	function height() {
 		setCartStatus(!openCart);
@@ -44,8 +51,21 @@ export default function CartContainer({ order, setOrder }) {
 				className="cart-container"
 				style={openCart ? { display: "block", height: "calc(100% - 90px)" } : { height: "80px" }} // transform height of cart container if open or not
 			>
-				<CartStatus />
-				<CartList order={order} setOrder={setOrder} />
+				<CartStatus cartStage={cartStage} />
+
+				{cartStage === "current order" ? (
+					<CartList
+						order={order}
+						setOrder={setOrder}
+						cartStage={cartStage}
+						setCartStage={setStage}
+						className="fade-in"
+					/>
+				) : null}
+
+				{cartStage === "account" ? <Account cartStage={cartStage} setCartStage={setStage} className="fade-in" /> : null}
+
+				{cartStage === "payment" ? <Payment cartStage={cartStage} setCartStage={setStage} className="fade-in" /> : null}
 			</div>
 		</div>
 	);

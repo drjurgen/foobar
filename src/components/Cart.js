@@ -1,14 +1,18 @@
 import React from "react"; // import React
 import CartItem from "./CartItem"; // import Cart
 
-export default function CartList({ order, setOrder }) {
+export default function CartList({ order, setOrder, cartStage, setCartStage }) {
 	function deleteItem(name) {
 		order.beers = order.beers.filter((item) => item.name !== name);
 		setOrder(order);
 	}
 
+	function proceed() {
+		setCartStage("account");
+	}
+
 	return (
-		<section className="cart-inner">
+		<section className="cart-inner fade-in">
 			{order.beers.length === 0 ? (
 				<div>
 					<p>No items in cart</p>
@@ -29,7 +33,9 @@ export default function CartList({ order, setOrder }) {
 					proceed
 				</button>
 			) : (
-				<button className="proceed">proceed</button>
+				<button className="proceed" onClick={proceed}>
+					proceed
+				</button>
 			)}
 		</section>
 	);

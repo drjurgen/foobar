@@ -1,0 +1,83 @@
+@import "../vars";
+
+.payment-container {
+	display: grid;
+	grid-template-rows: 40px 35px auto 40px;
+	align-items: start;
+	width: 100%;
+	height: 76%;
+
+	h2 {
+		color: $primaryBlue;
+		text-transform: uppercase;
+		margin-bottom: 10px;
+	}
+
+	.select-payment {
+		appearance: none;
+		width: 100%;
+		height: 35px;
+		border-radius: 10px;
+		padding: 0 15px;
+
+		background-image: url("../../imgs/arrow-down.svg");
+		background-position: calc(100% - 15px) center;
+		background-size: 20px;
+		background-repeat: no-repeat;
+		background-color: rgba(246, 246, 246, 0.66);
+		border: none;
+		text-transform: uppercase;
+		font-family: gingerpro-bold;
+	}
+
+	.select-payment:focus {
+		outline: none;
+	}
+
+	.payment-method-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+	}
+
+	.stage-actions {
+		align-self: end;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+
+		.proceed {
+			padding: 0 45px;
+			height: 45px;
+			text-transform: uppercase;
+			font-family: gingerpro-bold;
+			font-size: 14px;
+			border: none;
+			border-radius: 10px;
+			background-color: $primaryBlue;
+			color: $primaryWhite;
+		}
+
+		.proceed:disabled {
+			opacity: 0.6;
+		}
+
+		.back {
+			padding: 0 30px;
+			height: 45px;
+			text-transform: uppercase;
+			font-family: gingerpro-bold;
+			font-size: 14px;
+			border: none;
+			border-radius: 10px;
+			background-color: transparent;
+			color: $primaryBlack;
+		}
+
+		.proceed:focus,
+		.back:focus {
+			outline: none;
+		}
+	}
+}
