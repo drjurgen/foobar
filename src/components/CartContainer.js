@@ -1,8 +1,8 @@
 import React, { useState } from "react"; // import React
-import CartList from "./Cart"; // import Cart
+import CartList from "./CartList"; // import Cart
 import CartStatus from "./CartStatus"; // import Cart
 import Account from "./Account"; // import Account
-import Payment from "./Payment"; // import Payment
+import Payment from "./CartPayment"; // import Payment
 
 export default function CartContainer({ order, setOrder }) {
 	const [openCart, setCartStatus] = useState(false);
