@@ -1,10 +1,21 @@
-import React, { useState } from "react"; // import React
+import React, { useEffect, useState } from "react"; // import React
+import elhefe from "../beer_imgs/elhefe.png";
+import fairytaleale from "../beer_imgs/fairytaleale.png";
+import githop from "../beer_imgs/githop.png";
+import hollaback from "../beer_imgs/hollaback.png";
+import hoppilyeverafter from "../beer_imgs/hoppilyeverafter.png";
+import mowintime from "../beer_imgs/mowintime.png";
+import row26 from "../beer_imgs/row26.png";
+import ruinedchildhood from "../beer_imgs/ruinedchildhood.png";
+import sleighride from "../beer_imgs/sleighride.png";
+import steampunk from "../beer_imgs/steampunk.png";
 
 export function Beer({ beerInfo, showBeer, order, setOrder }) {
 	const orderState = { ...order };
 
+	const imgSource = require("../beer_imgs/" + beerInfo.label);
 	const beerImg = {
-		backgroundImage: `url(https://carlsbergdanmark.dk/media/39506/1664_blanc_bottle_wcap_wet_lowres.png)`,
+		backgroundImage: `url(${imgSource.default})`,
 	};
 
 	const [orderAmount, setAmount] = useState(1);
@@ -88,8 +99,9 @@ export function Beer({ beerInfo, showBeer, order, setOrder }) {
 }
 
 export function NotAvailable({ facts, beerInfo }) {
+	const imgSource = require("../beer_imgs/" + beerInfo.label);
 	const beerImg = {
-		backgroundImage: `url(https://carlsbergdanmark.dk/media/39506/1664_blanc_bottle_wcap_wet_lowres.png)`,
+		backgroundImage: `url(${imgSource.default})`,
 	};
 
 	return (

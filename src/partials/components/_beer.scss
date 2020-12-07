@@ -14,8 +14,8 @@
 
 	.beer-img {
 		width: 100%;
-		background-position: center;
-		background-size: contain;
+		background-position: center calc(100% + 6px);
+		background-size: 130%;
 		background-repeat: no-repeat;
 	}
 

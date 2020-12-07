@@ -47,10 +47,16 @@ export default function SingleView({ showBeer, info, order, setOrder }) {
 		setAmount(event.target.value);
 	}
 
+	const imgSource = require("../beer_imgs/" + info.label);
+	const beerImg = {
+		backgroundImage: `linear-gradient(180deg, rgba(250, 250, 250, 0) 0%, rgba(250, 250, 250, 0) 0.01%, #fff 95.4%), url(${imgSource.default})`,
+		// backgroundImage: `url(${imgSource.default})`,
+	};
+
 	return (
 		<section className="singleview-bg show-singleview">
 			<article className="singleview-container">
-				<div className="singleview-image"></div>
+				<div className="singleview-image" style={beerImg}></div>
 
 				<h2>{info.name}</h2>
 				<div className="generic-info">
