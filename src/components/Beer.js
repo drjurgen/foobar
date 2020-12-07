@@ -1,14 +1,4 @@
-import React, { useEffect, useState } from "react"; // import React
-import elhefe from "../beer_imgs/elhefe.png";
-import fairytaleale from "../beer_imgs/fairytaleale.png";
-import githop from "../beer_imgs/githop.png";
-import hollaback from "../beer_imgs/hollaback.png";
-import hoppilyeverafter from "../beer_imgs/hoppilyeverafter.png";
-import mowintime from "../beer_imgs/mowintime.png";
-import row26 from "../beer_imgs/row26.png";
-import ruinedchildhood from "../beer_imgs/ruinedchildhood.png";
-import sleighride from "../beer_imgs/sleighride.png";
-import steampunk from "../beer_imgs/steampunk.png";
+import React, { useState } from "react"; // import React
 
 export function Beer({ beerInfo, showBeer, order, setOrder }) {
 	const orderState = { ...order };
@@ -98,7 +88,7 @@ export function Beer({ beerInfo, showBeer, order, setOrder }) {
 	);
 }
 
-export function NotAvailable({ facts, beerInfo }) {
+export function NotAvailable({ beerInfo }) {
 	const imgSource = require("../beer_imgs/" + beerInfo.label);
 	const beerImg = {
 		backgroundImage: `url(${imgSource.default})`,
