@@ -37,7 +37,7 @@ export default function Payment({ cartStage, setCartStage }) {
 			</select>
 
 			<div className="payment-method-container">
-				{paymentMethod === "payment-method" ? <p>please select payment method</p> : null}
+				{paymentMethod === "payment-method" ? <p>please select a payment method</p> : null}
 				{paymentMethod === "credit-card" ? <CartPayCredit /> : null}
 				{paymentMethod === "mobilepay" ? <CartPayMPay /> : null}
 			</div>
