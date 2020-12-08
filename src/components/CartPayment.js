@@ -19,8 +19,11 @@ export default function Payment({ cartStage, setCartStage }) {
 	}
 
 	return (
-		<section className="payment-container fade-in">
-			<h2>Select payment method</h2>
+		<section
+			className="payment-container fade-in"
+			style={paymentMethod !== "payment-method" ? { gridTemplateRows: "35px auto" } : null}
+		>
+			{paymentMethod === "payment-method" ? <h3>Select payment method</h3> : null}
 
 			<select
 				name="payment-method"
@@ -36,19 +39,24 @@ export default function Payment({ cartStage, setCartStage }) {
 				<option value="mobilepay">MobilePay</option>
 			</select>
 
-			<div className="payment-method-container">
+			<div
+				className="payment-method-container"
+				style={paymentMethod !== "payment-method" ? { gridTemplateRows: "auto" } : null}
+			>
 				{paymentMethod === "payment-method" ? <p>please select a payment method</p> : null}
-				{paymentMethod === "credit-card" ? <CartPayCredit /> : null}
-				{paymentMethod === "mobilepay" ? <CartPayMPay /> : null}
-			</div>
+				{paymentMethod === "credit-card" ? <CartPayCredit cartStage={cartStage} setCartStage={setCartStage} /> : null}
+				{paymentMethod === "mobilepay" ? <CartPayMPay cartStage={cartStage} setCartStage={setCartStage} /> : null}
 
-			<div className="stage-actions">
-				<button className="back" onClick={back}>
-					Back
-				</button>
-				<button className="proceed" disabled onClick={proceed}>
-					Proceed
-				</button>
+				{paymentMethod === "payment-method" ? (
+					<div className="stage-actions">
+						<button className="back" onClick={back}>
+							Back
+						</button>
+						<button className="proceed" disabled onClick={proceed}>
+							Proceed
+						</button>
+					</div>
+				) : null}
 			</div>
 		</section>
 	);

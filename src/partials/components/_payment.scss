@@ -2,12 +2,12 @@
 
 .payment-container {
 	display: grid;
-	grid-template-rows: 40px 35px auto 40px;
+	grid-template-rows: 35px 35px auto;
 	align-items: start;
 	width: 100%;
 	height: 76%;
 
-	h2 {
+	h3 {
 		color: $primaryBlue;
 		text-transform: uppercase;
 		margin-bottom: 10px;
@@ -36,12 +36,11 @@
 	}
 
 	.payment-method-container {
-		display: flex;
-		justify-content: flex-start;
-		align-items: center;
-		flex-direction: column;
+		display: grid;
+		grid-template-rows: auto 40px;
 		padding-top: 10px;
 		height: 100%;
+		text-align: center;
 	}
 
 	.stage-actions {

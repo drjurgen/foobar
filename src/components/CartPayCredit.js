@@ -1,6 +1,6 @@
 import React, { useState } from "react"; // import React
 
-export default function CartPayCredit() {
+export default function CartPayCredit({ cartStage, setCartStage }) {
 	const [name, setName] = useState("Your name here");
 	const [cardNumber, setCardNumber] = useState("");
 	const [atCVC, setAtCVC] = useState(false);
@@ -45,8 +45,16 @@ export default function CartPayCredit() {
 		setYear(event.target.value);
 	}
 
+	function proceed() {
+		setCartStage("get order");
+	}
+
+	function back() {
+		setCartStage("account");
+	}
+
 	return (
-		<section className="credit-form-container">
+		<div className="credit-form-container">
 			<div className="credit-card">
 				<div className="credit-card-inner" style={atCVC ? { transform: "rotateY(-180deg)" } : {}}>
 					<div className="credit-card-back">
@@ -110,6 +118,15 @@ export default function CartPayCredit() {
 					</div>
 				</div>
 			</form>
-		</section>
+
+			<div className="stage-actions">
+				<button className="back" onClick={back}>
+					Back
+				</button>
+				<button className="proceed" disabled onClick={proceed}>
+					Proceed
+				</button>
+			</div>
+		</div>
 	);
 }
