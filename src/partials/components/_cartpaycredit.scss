@@ -4,10 +4,20 @@
 	width: 100%;
 	height: 100%;
 	display: grid;
-	grid-template-rows: 210px auto 40px;
+	grid-template-rows: 190px auto;
 	align-items: start;
 
 	.credit-card-form {
+		grid-template-rows: auto auto;
+		align-items: start;
+		display: grid;
+		height: 100%;
+		overflow: scroll;
+
+		.stage-actions {
+			align-self: end;
+		}
+
 		input {
 			appearance: none;
 			-webkit-appearance: none;
@@ -16,12 +26,33 @@
 			border-radius: 10px;
 			padding: 0 15px;
 			margin-bottom: 15px;
-
 			background-size: 20px;
 			background-repeat: no-repeat;
 			background-color: rgba(246, 246, 246, 0.66);
 			border: none;
 			text-transform: uppercase;
+		}
+
+		.error-msg {
+			margin-top: -12px;
+			margin-bottom: 15px;
+			font-size: 13px;
+			text-align: left;
+			color: $secondaryRed;
+
+			animation: error_fade_kf 0.6s ease-out 1 forwards;
+		}
+
+		@keyframes error_fade_kf {
+			0% {
+				opacity: 0;
+				transform: translateY(-5px);
+			}
+
+			100% {
+				opacity: 1;
+				transform: translateY(0);
+			}
 		}
 
 		.credit-card-last-info {
@@ -54,13 +85,24 @@
 				}
 			}
 		}
+		.errors-last-info {
+			display: flex;
+			justify-content: flex-start;
+			text-align: left;
+			.error-container {
+				span:nth-child(2),
+				span:last-child {
+					margin-left: 3px;
+				}
+			}
+		}
 	}
 }
 
 .credit-card {
 	background-color: transparent;
 	width: 100%;
-	height: 200px;
+	height: 180px;
 	margin-bottom: 20px;
 
 	.credit-card-inner {

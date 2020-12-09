@@ -124,5 +124,3 @@ export function NotAvailable({ beerInfo }) {
 		</article>
 	);
 }
-
-// export default { Beer, NotAvailable };

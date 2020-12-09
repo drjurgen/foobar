@@ -49,7 +49,7 @@ export default function CartContainer({ order, setOrder }) {
 
 			<div
 				className="cart-container"
-				style={openCart ? { display: "block", height: "calc(100% - 90px)" } : { height: "80px" }} // transform height of cart container if open or not
+				style={openCart ? { height: "calc(100% - 90px)" } : { height: "80px" }} // transform height of cart container if open or not
 			>
 				<CartStatus cartStage={cartStage} />
 

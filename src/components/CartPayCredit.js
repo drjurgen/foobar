@@ -1,4 +1,5 @@
 import React, { useState } from "react"; // import React
+import CartPayCreditForm from "./CartPayCreditForm"; // import form component
 
 export default function CartPayCredit({ cartStage, setCartStage }) {
 	const [name, setName] = useState("Your name here");
@@ -49,8 +50,14 @@ export default function CartPayCredit({ cartStage, setCartStage }) {
 		setCartStage("get order");
 	}
 
-	function back() {
+	function back(event) {
+		event.preventDefault();
 		setCartStage("account");
+	}
+
+	function onSubmit(data) {
+		console.log(data);
+		proceed();
 	}
 
 	return (
@@ -94,39 +101,17 @@ export default function CartPayCredit({ cartStage, setCartStage }) {
 				</div>
 			</div>
 
-			<form className="credit-card-form">
-				<input placeholder="Name on card" onInput={getName} />
-				<input placeholder="Card number" type="text" onInput={getCardNumber} maxLength="19" value={cardNumber} />
-
-				<div className="credit-card-last-info">
-					<div className="credit-card-valid-thru">
-						<input placeholder="MM" type="text" maxLength="2" size="40px" onInput={getMonth} />
-						<p>/</p>
-						<input placeholder="YY" type="text" maxLength="2" onInput={getYear} />
-					</div>
-
-					<div className="cvc">
-						<input
-							placeholder="CVC"
-							type="text"
-							maxLength="3"
-							minLength="3"
-							onInput={getCVC}
-							onFocus={getCVCFocus}
-							onBlur={getCVCFocus}
-						/>
-					</div>
-				</div>
-			</form>
-
-			<div className="stage-actions">
-				<button className="back" onClick={back}>
-					Back
-				</button>
-				<button className="proceed" disabled onClick={proceed}>
-					Proceed
-				</button>
-			</div>
+			<CartPayCreditForm
+				cardNumber={cardNumber}
+				getName={getName}
+				getCardNumber={getCardNumber}
+				getCVCFocus={getCVCFocus}
+				getCVC={getCVC}
+				getMonth={getMonth}
+				getYear={getYear}
+				back={back}
+				onSubmit={onSubmit}
+			/>
 		</div>
 	);
 }
