@@ -2,7 +2,7 @@ import React, { useState } from "react"; // import React
 import CartPayCredit from "./CartPayCredit"; // import CartPayCredit
 import CartPayMPay from "./CartPayMPay"; // import CartPayMPay
 
-export default function Payment({ cartStage, setCartStage }) {
+export default function Payment({ cartStage, setCartStage, postOrder }) {
 	const [paymentMethod, setPayment] = useState("payment-method");
 
 	function proceed() {
@@ -44,7 +44,9 @@ export default function Payment({ cartStage, setCartStage }) {
 				style={paymentMethod !== "payment-method" ? { gridTemplateRows: "auto" } : null}
 			>
 				{paymentMethod === "payment-method" ? <p>please select a payment method</p> : null}
-				{paymentMethod === "credit-card" ? <CartPayCredit cartStage={cartStage} setCartStage={setCartStage} /> : null}
+				{paymentMethod === "credit-card" ? (
+					<CartPayCredit cartStage={cartStage} setCartStage={setCartStage} postOrder={postOrder} />
+				) : null}
 				{paymentMethod === "mobilepay" ? <CartPayMPay cartStage={cartStage} setCartStage={setCartStage} /> : null}
 
 				{paymentMethod === "payment-method" ? (

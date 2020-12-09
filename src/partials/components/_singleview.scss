@@ -7,7 +7,7 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-	padding: 20px 20px 20px 20px;
+	padding: 20px 20px 60px 20px;
 	z-index: 2;
 	backdrop-filter: blur(10px);
 
@@ -17,6 +17,7 @@
 		border-radius: 20px;
 		background-color: $secondaryWhite;
 		position: relative;
+		overflow: scroll;
 
 		display: grid;
 		align-items: start;

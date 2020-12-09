@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"; // import React
 import Header from "./components/Header"; // import Header component
 import Main from "./components/Main"; // import Main component
-import { get } from "./modules/rest"; // import REST operations
+import { get, post } from "./modules/rest"; // import REST operations
 import "./App.scss"; // import SASS
 
 function App() {
@@ -11,6 +11,14 @@ function App() {
 		totalPrice: 0,
 		beers: [],
 	});
+
+	function postOrder() {
+		post(order.beers, "https://foobar-data.herokuapp.com/order", logOrder);
+
+		function logOrder(data) {
+			console.log(data);
+		}
+	}
 
 	function setOrderState(order) {
 		setOrder(order);
@@ -42,7 +50,7 @@ function App() {
 	return (
 		<div className="App">
 			<Header />
-			<Main facts={facts} beerTypes={beerTypes} order={order} setOrder={setOrderState} />
+			<Main facts={facts} beerTypes={beerTypes} order={order} setOrder={setOrderState} postOrder={postOrder} />
 		</div>
 	);
 }

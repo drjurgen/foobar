@@ -4,7 +4,7 @@ import CartStatus from "./CartStatus"; // import Cart
 import Account from "./Account"; // import Account
 import Payment from "./CartPayment"; // import Payment
 
-export default function CartContainer({ order, setOrder }) {
+export default function CartContainer({ order, setOrder, postOrder }) {
 	const [openCart, setCartStatus] = useState(false);
 	const [cartStage, setCartStage] = useState("current order");
 
@@ -49,7 +49,7 @@ export default function CartContainer({ order, setOrder }) {
 
 			<div
 				className="cart-container"
-				style={openCart ? { height: "calc(100% - 90px)" } : { height: "80px" }} // transform height of cart container if open or not
+				style={openCart ? { height: "calc(100% - 90px)" } : { height: "0", padding: 0 }} // transform height of cart container if open or not
 			>
 				<CartStatus cartStage={cartStage} />
 
@@ -65,7 +65,9 @@ export default function CartContainer({ order, setOrder }) {
 
 				{cartStage === "account" ? <Account cartStage={cartStage} setCartStage={setStage} className="fade-in" /> : null}
 
-				{cartStage === "payment" ? <Payment cartStage={cartStage} setCartStage={setStage} className="fade-in" /> : null}
+				{cartStage === "payment" ? (
+					<Payment cartStage={cartStage} setCartStage={setStage} postOrder={postOrder} className="fade-in" />
+				) : null}
 			</div>
 		</div>
 	);

@@ -4,7 +4,7 @@ import BeerList from "./BeerList"; // import Preload component
 import CartContainer from "./CartContainer"; // import Preload component
 import SingleView from "./SingleView"; // import Preload component
 
-export default function Main({ facts, beerTypes, order, setOrder }) {
+export default function Main({ facts, beerTypes, order, setOrder, postOrder }) {
 	const [showSingleBeer, setShowBeer] = useState(false);
 	const [singleBeerInfo, setBeerInfo] = useState();
 
@@ -22,7 +22,7 @@ export default function Main({ facts, beerTypes, order, setOrder }) {
 			{facts.bar !== undefined && beerTypes !== [] ? (
 				<>
 					<BeerList facts={facts} beerTypes={beerTypes} showBeer={showBeer} order={order} setOrder={setOrder} />
-					<CartContainer order={order} setOrder={setOrder} />
+					<CartContainer order={order} setOrder={setOrder} postOrder={postOrder} />
 					{showSingleBeer ? (
 						<SingleView showBeer={showBeer} info={singleBeerInfo} order={order} setOrder={setOrder} />
 					) : null}

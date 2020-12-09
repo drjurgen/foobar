@@ -1,7 +1,7 @@
 import React, { useState } from "react"; // import React
 import CartPayCreditForm from "./CartPayCreditForm"; // import form component
 
-export default function CartPayCredit({ cartStage, setCartStage }) {
+export default function CartPayCredit({ cartStage, setCartStage, postOrder }) {
 	const [name, setName] = useState("Your name here");
 	const [cardNumber, setCardNumber] = useState("");
 	const [atCVC, setAtCVC] = useState(false);
@@ -58,6 +58,7 @@ export default function CartPayCredit({ cartStage, setCartStage }) {
 	function onSubmit(data) {
 		console.log(data);
 		proceed();
+		postOrder();
 	}
 
 	return (
@@ -108,7 +109,9 @@ export default function CartPayCredit({ cartStage, setCartStage }) {
 				getCVCFocus={getCVCFocus}
 				getCVC={getCVC}
 				getMonth={getMonth}
+				month={month}
 				getYear={getYear}
+				year={year}
 				back={back}
 				onSubmit={onSubmit}
 			/>

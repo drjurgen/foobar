@@ -4,6 +4,9 @@ import { useForm } from "react-hook-form"; // import react-hook-form
 export default function CartPayCreditForm(props) {
 	const { register, errors, handleSubmit } = useForm();
 
+	const currentMonth = (new Date().getMonth() + 1).toString();
+	const currentYear = new Date().getFullYear().toString().substring(2);
+
 	function onError(errors) {
 		console.log(errors);
 	}
@@ -49,7 +52,7 @@ export default function CartPayCreditForm(props) {
 								required: { value: true, message: "Please enter a valid expirary month" },
 								minLength: { value: 2, message: "Month needs to be 2 digits" },
 								min: {
-									value: (new Date().getMonth() + 1).toString(),
+									value: props.year === currentYear ? currentMonth : "01",
 									message: "Please enter a valid expirary month",
 								},
 								max: { value: 12, message: "Please enter a valid expirary month" },
