@@ -1,4 +1,4 @@
-import React, { useState } from "react"; // import React
+import React, { useState, useEffect } from "react"; // import React
 import CartList from "./CartList"; // import Cart
 import CartStatus from "./CartStatus"; // import Cart
 import Account from "./Account"; // import Account
@@ -7,6 +7,14 @@ import Payment from "./CartPayment"; // import Payment
 export default function CartContainer({ order, setOrder, postOrder }) {
 	const [openCart, setCartStatus] = useState(false);
 	const [cartStage, setCartStage] = useState("current order");
+
+	useEffect(() => {
+		if (openCart === true) {
+			document.body.classList.add("no-scroll");
+		} else {
+			document.body.classList.remove("no-scroll");
+		}
+	}, [openCart]);
 
 	function setStage(value) {
 		setCartStage(value);
@@ -46,6 +54,8 @@ export default function CartContainer({ order, setOrder, postOrder }) {
 					></button>
 				</div>
 			</div>
+
+			{openCart ? <div className="blur-bg"></div> : null}
 
 			<div
 				className="cart-container"

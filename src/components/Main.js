@@ -1,4 +1,4 @@
-import React, { useState } from "react"; // import React
+import React, { useEffect, useState } from "react"; // import React
 import Preload from "./Preload"; // import Preload component
 import BeerList from "./BeerList"; // import Preload component
 import CartContainer from "./CartContainer"; // import Preload component
@@ -7,6 +7,14 @@ import SingleView from "./SingleView"; // import Preload component
 export default function Main({ facts, beerTypes, order, setOrder, postOrder }) {
 	const [showSingleBeer, setShowBeer] = useState(false);
 	const [singleBeerInfo, setBeerInfo] = useState();
+
+	useEffect(() => {
+		if (showSingleBeer === true) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "";
+		}
+	}, [showSingleBeer]);
 
 	function showBeer(beerInfo) {
 		setShowBeer(!showSingleBeer);

@@ -34,7 +34,7 @@ export default function CartPayCreditForm(props) {
 					value={props.cardNumber}
 					ref={register({
 						required: { value: true, message: "Please enter a valid card number" },
-						minLength: { value: 19, message: "Card number must be 16 characters" },
+						minLength: { value: 18, message: "Card number must be 16 characters" },
 					})}
 				/>
 				{errors.cardNumber && <p className="error-msg">{errors.cardNumber.message}</p>}
