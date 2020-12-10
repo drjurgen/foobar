@@ -11,6 +11,11 @@ export default function CartPayCreditForm(props) {
 		console.log(errors);
 	}
 
+	function selectPayment(event) {
+		event.preventDefault();
+		props.setPayment("payment-method");
+	}
+
 	return (
 		<form className="credit-card-form" onSubmit={handleSubmit(props.onSubmit, onError)}>
 			<div className="credit-card-form-content">
@@ -117,7 +122,7 @@ export default function CartPayCreditForm(props) {
 			</div>
 
 			<div className="stage-actions">
-				<button className="back" onClick={props.back}>
+				<button className="back" onClick={selectPayment}>
 					Back
 				</button>
 				<button className="proceed" type="submit">

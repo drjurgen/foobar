@@ -21,23 +21,25 @@ export default function Payment({ cartStage, setCartStage, postOrder }) {
 	return (
 		<section
 			className="payment-container fade-in"
-			style={paymentMethod !== "payment-method" ? { gridTemplateRows: "35px auto" } : null}
+			style={paymentMethod !== "payment-method" ? { gridTemplateRows: "auto" } : null}
 		>
 			{paymentMethod === "payment-method" ? <h3>Select payment method</h3> : null}
 
-			<select
-				name="payment-method"
-				id="payment-method"
-				className="select-payment"
-				onInput={getPayMethod}
-				defaultValue={{ label: "one", value: 0 }}
-			>
-				<option value={{ value: "one", label: "One" }} disabled>
-					Payment method
-				</option>
-				<option value="credit-card">Credit Card</option>
-				<option value="mobilepay">MobilePay</option>
-			</select>
+			{paymentMethod === "payment-method" ? (
+				<select
+					name="payment-method"
+					id="payment-method"
+					className="select-payment"
+					onInput={getPayMethod}
+					defaultValue={{ label: "one", value: 0 }}
+				>
+					<option value={{ value: "one", label: "One" }} disabled>
+						Payment method
+					</option>
+					<option value="credit-card">Credit Card</option>
+					<option value="mobilepay">MobilePay</option>
+				</select>
+			) : null}
 
 			<div
 				className="payment-method-container"
@@ -45,7 +47,13 @@ export default function Payment({ cartStage, setCartStage, postOrder }) {
 			>
 				{paymentMethod === "payment-method" ? <p>please select a payment method</p> : null}
 				{paymentMethod === "credit-card" ? (
-					<CartPayCredit cartStage={cartStage} setCartStage={setCartStage} postOrder={postOrder} />
+					<CartPayCredit
+						cartStage={cartStage}
+						setCartStage={setCartStage}
+						postOrder={postOrder}
+						paymentMethod={paymentMethod}
+						setPayment={setPayment}
+					/>
 				) : null}
 				{paymentMethod === "mobilepay" ? <CartPayMPay cartStage={cartStage} setCartStage={setCartStage} /> : null}
 
