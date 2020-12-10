@@ -22,7 +22,7 @@
 
 		display: grid;
 		align-items: start;
-		grid-template-rows: 30% 50px 30px 47.5% auto;
+		grid-template-rows: 30% 30px 30px 47.5% auto;
 		padding: 20px;
 
 		.singleview-image {
@@ -61,6 +61,10 @@
 			h3 {
 				text-transform: uppercase;
 				font-size: 16px;
+			}
+
+			p {
+				font-size: 14px;
 			}
 
 			.mouthfeel {
