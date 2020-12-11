@@ -2,7 +2,10 @@ import React from "react"; // import React
 import { useForm } from "react-hook-form"; // import react-hook-form
 
 export default function CartPayCreditForm(props) {
-	const { register, errors, handleSubmit } = useForm();
+	const { register, errors, handleSubmit } = useForm({
+		shouldFocusError: false,
+		mode: "onTouched",
+	});
 
 	const currentMonth = (new Date().getMonth() + 1).toString();
 	const currentYear = new Date().getFullYear().toString().substring(2);
@@ -31,15 +34,16 @@ export default function CartPayCreditForm(props) {
 				{errors.cardName && <p className="error-msg">{errors.cardName.message}</p>}
 
 				<input
+					inputMode="numeric"
 					name="cardNumber"
 					placeholder="Card number"
 					type="text"
 					onInput={props.getCardNumber}
-					maxLength="19"
-					value={props.cardNumber}
+					maxLength="16"
+					defaultValue={props.cardNumber}
 					ref={register({
 						required: { value: true, message: "Please enter a valid card number" },
-						minLength: { value: 18, message: "Card number must be 16 characters" },
+						minLength: { value: 16, message: "Card number must be 16 characters" },
 					})}
 				/>
 				{errors.cardNumber && <p className="error-msg">{errors.cardNumber.message}</p>}
@@ -47,6 +51,7 @@ export default function CartPayCreditForm(props) {
 				<div className="credit-card-last-info">
 					<div className="credit-card-valid-thru">
 						<input
+							inputMode="numeric"
 							name="cardMonth"
 							placeholder="MM"
 							type="text"
@@ -65,6 +70,7 @@ export default function CartPayCreditForm(props) {
 						/>
 						<p>/</p>
 						<input
+							inputMode="numeric"
 							name="cardYear"
 							placeholder="YY"
 							type="text"
@@ -83,6 +89,7 @@ export default function CartPayCreditForm(props) {
 
 					<div className="cvc">
 						<input
+							inputMode="numeric"
 							name="cardCVC"
 							placeholder="CVC"
 							type="text"

@@ -10,13 +10,28 @@ function App() {
 	const [order, setOrder] = useState({
 		totalPrice: 0,
 		beers: [],
+		paymentInfo: "",
+		orderInfo: "",
 	});
+	const [orderInfo, setOrderInfo] = useState();
+
+	useEffect(() => {
+		if (order.paymentInfo !== "") {
+			const orderDetails = { ...order };
+			orderDetails.orderInfo = orderInfo;
+			setOrder(orderDetails);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [orderInfo]);
 
 	function postOrder() {
 		post(order.beers, "https://foobar-data.herokuapp.com/order", logOrder);
 
 		function logOrder(data) {
+			const orderDetails = { ...order };
+			orderDetails.paymentInfo = data;
 			console.log(data);
+			setOrderInfo(data);
 		}
 	}
 

@@ -3,8 +3,9 @@ import CartList from "./CartList"; // import Cart
 import CartStatus from "./CartStatus"; // import Cart
 import Account from "./Account"; // import Account
 import Payment from "./CartPayment"; // import Payment
+import CartGetOrder from "./CartGetOrder";
 
-export default function CartContainer({ order, setOrder, postOrder }) {
+export default function CartContainer({ order, setOrder, postOrder, facts }) {
 	const [openCart, setCartStatus] = useState(false);
 	const [cartStage, setCartStage] = useState("current order");
 
@@ -64,19 +65,29 @@ export default function CartContainer({ order, setOrder, postOrder }) {
 				<CartStatus cartStage={cartStage} />
 
 				{cartStage === "current order" ? (
-					<CartList
-						order={order}
-						setOrder={setOrder}
+					<CartList order={order} setOrder={setOrder} cartStage={cartStage} setCartStage={setStage} />
+				) : null}
+
+				{cartStage === "account" ? <Account cartStage={cartStage} setCartStage={setStage} /> : null}
+
+				{cartStage === "payment" ? (
+					<Payment
 						cartStage={cartStage}
 						setCartStage={setStage}
-						className="fade-in"
+						postOrder={postOrder}
+						order={order}
+						setOrder={setOrder}
 					/>
 				) : null}
 
-				{cartStage === "account" ? <Account cartStage={cartStage} setCartStage={setStage} className="fade-in" /> : null}
-
-				{cartStage === "payment" ? (
-					<Payment cartStage={cartStage} setCartStage={setStage} postOrder={postOrder} className="fade-in" />
+				{cartStage === "get order" ? (
+					<CartGetOrder
+						order={order}
+						facts={facts}
+						setCartStage={setStage}
+						setOrder={setOrder}
+						setCartStatus={setCartStatus}
+					/>
 				) : null}
 			</div>
 		</div>

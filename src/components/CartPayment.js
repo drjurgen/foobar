@@ -2,7 +2,7 @@ import React, { useState } from "react"; // import React
 import CartPayCredit from "./CartPayCredit"; // import CartPayCredit
 import CartPayMPay from "./CartPayMPay"; // import CartPayMPay
 
-export default function Payment({ cartStage, setCartStage, postOrder }) {
+export default function Payment({ cartStage, setCartStage, postOrder, order, setOrder }) {
 	const [paymentMethod, setPayment] = useState("payment-method");
 
 	function proceed() {
@@ -53,6 +53,8 @@ export default function Payment({ cartStage, setCartStage, postOrder }) {
 						postOrder={postOrder}
 						paymentMethod={paymentMethod}
 						setPayment={setPayment}
+						order={order}
+						setOrder={setOrder}
 					/>
 				) : null}
 				{paymentMethod === "mobilepay" ? <CartPayMPay cartStage={cartStage} setCartStage={setCartStage} /> : null}

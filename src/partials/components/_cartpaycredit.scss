@@ -33,10 +33,6 @@
 			text-transform: uppercase;
 		}
 
-		input:invalid {
-			background-color: $secondaryRed;
-		}
-
 		.error-msg {
 			margin-top: -12px;
 			margin-bottom: 15px;

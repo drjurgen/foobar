@@ -26,11 +26,11 @@ export default function Main({ facts, beerTypes, order, setOrder, postOrder }) {
 	}
 
 	return (
-		<main style={{ marginBottom: "65px" }}>
+		<main style={{ marginBottom: "125px" }}>
 			{facts.bar !== undefined && beerTypes !== [] ? (
 				<>
 					<BeerList facts={facts} beerTypes={beerTypes} showBeer={showBeer} order={order} setOrder={setOrder} />
-					<CartContainer order={order} setOrder={setOrder} postOrder={postOrder} />
+					<CartContainer order={order} setOrder={setOrder} postOrder={postOrder} facts={facts} />
 					{showSingleBeer ? (
 						<SingleView showBeer={showBeer} info={singleBeerInfo} order={order} setOrder={setOrder} />
 					) : null}
