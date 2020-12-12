@@ -4,6 +4,7 @@ import { get } from "../modules/rest"; // import REST operations
 export default function CartGetOrder({ order, facts, setCartStage, setOrder, setCartStatus }) {
 	const [status, setStatus] = useState("In Queue");
 	const [updates, setUpdates] = useState({ ...facts });
+
 	useEffect(() => {
 		getStatus();
 		get("https://foobar-data.herokuapp.com/", setUpdates);
@@ -46,6 +47,45 @@ export default function CartGetOrder({ order, facts, setCartStage, setOrder, set
 		}
 	}
 
+	const [beerAmount, setAmount] = useState(0);
+	const [queueAmount, setQueue] = useState(0);
+	const [totalBeers, setTotal] = useState(0);
+
+	useEffect(() => {
+		calcEta();
+		function calcEta() {
+			if (beerAmount === 0) {
+				let servingAmount = 0;
+				doneOrder.beers.forEach((beer) => {
+					servingAmount += beer.amount;
+					// console.log(servingAmount);
+				});
+
+				setAmount(servingAmount);
+				console.log("beers to serve", beerAmount);
+			}
+
+			if (status === "In Queue") {
+				const beersInFront = [...updates.queue].slice(0, queueNum - 1);
+
+				let count = 0;
+				beersInFront.forEach((entry) => {
+					count = count + entry.order.length;
+				});
+				setQueue(count);
+				console.log("beers in front", queueAmount);
+			}
+
+			if (status === "Serving") {
+				console.log(totalBeers);
+			}
+
+			setTotal(queueAmount + beerAmount);
+			console.log("beers in front of you + yours: ", totalBeers);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [beerAmount, queueNum, status, queueAmount, totalBeers]);
+
 	function resetOrder() {
 		console.log("order reset");
 		const emptyOrder = {
@@ -57,13 +97,15 @@ export default function CartGetOrder({ order, facts, setCartStage, setOrder, set
 
 		setOrder(emptyOrder);
 		setCartStatus(false);
-		setCartStage("current order");
+
+		setTimeout(setCartStage("current order"), 500);
 	}
 
 	return (
-		<section className="get-order">
+		<section className="get-order fade-in">
 			<div className="thanks">
-				<h2>Thank you, {doneOrder.paymentInfo.cardName}!</h2>
+				<h2>Thank you, </h2>
+				<h3>{doneOrder.paymentInfo.cardName}!</h3>
 				<p>
 					Thank you for ordering beer at FooBar! Your order number is #{orderId}. This page will automatically keep you
 					updated on your order’s current status.
@@ -75,7 +117,10 @@ export default function CartGetOrder({ order, facts, setCartStage, setOrder, set
 				{status === "Serving" ? <p>{statusServing}</p> : null}
 				{status === "Ready" ? <p>{statusReady}</p> : null}
 
-				{status !== "Ready" ? <h3>ETA: 2 min</h3> : null}
+				{status !== "Ready" && Math.floor((totalBeers * 25) / 60) < 1 ? <h3>ETA: less than a minute</h3> : null}
+				{status !== "Ready" && Math.floor((totalBeers * 25) / 60) > 1 ? (
+					<h3>ETA: ~{Math.floor((totalBeers * 25) / 60)} min</h3>
+				) : null}
 			</div>
 			{status !== "Ready" ? <div className="loading-icon-stage"></div> : null}
 

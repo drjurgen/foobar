@@ -13,6 +13,7 @@
 		display: grid;
 		height: 100%;
 		overflow: scroll;
+		color: $primaryBlack;
 
 		.stage-actions {
 			align-self: end;
@@ -120,6 +121,28 @@
 			display: grid;
 			grid-template-rows: 30px 50% auto;
 			align-items: start;
+			transition: 0.6s all ease-out;
+
+			.card-top {
+				width: 100%;
+				display: flex;
+				align-items: flex-start;
+				justify-content: space-between;
+
+				.visa-issuer,
+				.mastercard-issuer {
+					width: 80px;
+					height: 40px;
+					background-image: url("../../imgs/visa.svg");
+					background-size: contain;
+					background-position: top;
+					background-repeat: no-repeat;
+				}
+
+				.mastercard-issuer {
+					background-image: url("../../imgs/mastercard.svg");
+				}
+			}
 
 			.chip {
 				width: 35px;
@@ -208,8 +231,24 @@
 
 				p {
 					padding-bottom: 2px;
+					color: $primaryBlack !important;
 				}
 			}
+		}
+
+		.visa {
+			background: #1b79c1;
+
+			h2,
+			h3,
+			p {
+				color: $primaryWhite !important;
+			}
+		}
+
+		.mastercard {
+			background: #faa52e;
+			color: $primaryWhite !important;
 		}
 
 		.credit-card-front,

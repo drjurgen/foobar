@@ -21,7 +21,7 @@ export default function CartPayCreditForm(props) {
 
 	return (
 		<form className="credit-card-form" onSubmit={handleSubmit(props.onSubmit, onError)}>
-			<div className="credit-card-form-content">
+			<div className="credit-card-form-content fade-in">
 				<input
 					name="cardName"
 					placeholder="Name on card"

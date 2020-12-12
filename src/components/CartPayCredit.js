@@ -75,17 +75,30 @@ export default function CartPayCredit({
 
 	return (
 		<div className="credit-form-container">
-			<div className="credit-card">
+			<div className="credit-card fade-in">
 				<div className="credit-card-inner" style={atCVC ? { transform: "rotateY(-180deg)" } : {}}>
-					<div className="credit-card-back">
+					<div
+						className={`credit-card-back ${cardNumber.substring(0, 1) === "4" ? "visa" : ""} ${
+							cardNumber.substring(0, 2) === "51" ? "mastercard" : ""
+						}`}
+					>
 						<div className="stripe"></div>
 
 						<div className="signature">
 							<p>{cvc === "" ? "•••" : cvc}</p>
 						</div>
 					</div>
-					<div className="credit-card-front">
-						<div className="chip"></div>
+					<div
+						className={`credit-card-front ${cardNumber.substring(0, 1) === "4" ? "visa" : ""} ${
+							cardNumber.substring(0, 2) === "51" ? "mastercard" : ""
+						}
+						`}
+					>
+						<div className="card-top">
+							<div className="chip"></div>
+							{cardNumber.substring(0, 1) === "4" ? <div className="visa-issuer"></div> : null}
+							{cardNumber.substring(0, 2) === "51" ? <div className="mastercard-issuer"></div> : null}
+						</div>
 
 						<div className="card-number">
 							<h2 style={cardNumber !== "" ? { color: `#404040` } : { color: "#888" }}>
@@ -94,14 +107,7 @@ export default function CartPayCredit({
 						</div>
 
 						<div className="card-info">
-							<h3
-								style={
-									(name !== "Your name here" ? { color: `#404040` } : { color: "#888" },
-									name.length > 20 ? { fontSize: "13px" } : {})
-								}
-							>
-								{name}
-							</h3>
+							<h3 style={name.length > 20 ? { fontSize: "13px" } : {}}>{name}</h3>
 
 							<div className="valid-thru">
 								<p>valid thru</p>
