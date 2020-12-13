@@ -15,7 +15,7 @@ export function Beer({ beerInfo, showBeer, order, setOrder }) {
 	}
 
 	// add beer to cart
-	function addToCart() {
+	function addToCart(event) {
 		if (orderAmount > 0) {
 			// prevent adding "0" amount of beers to cart
 			const addBeers = {
@@ -35,6 +35,14 @@ export function Beer({ beerInfo, showBeer, order, setOrder }) {
 
 			setOrder(orderState); // call setOrder function in App-component
 			setAmount(1);
+
+			event.target.className = "add add-animation";
+			event.target.disabled = true;
+
+			setTimeout(() => {
+				event.target.className = "add";
+				event.target.disabled = false;
+			}, 750);
 		}
 	}
 

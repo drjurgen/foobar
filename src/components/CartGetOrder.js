@@ -2,18 +2,34 @@ import React, { useEffect, useState } from "react"; // import React
 import { get } from "../modules/rest"; // import REST operations
 
 export default function CartGetOrder({ order, facts, setCartStage, setOrder, setCartStatus }) {
+	const [complete, setComplete] = useState(false);
 	const [status, setStatus] = useState("In Queue");
 	const [updates, setUpdates] = useState({ ...facts });
 
 	useEffect(() => {
-		getStatus();
-		get("https://foobar-data.herokuapp.com/", setUpdates);
-
-		const interval = setInterval(() => {
+		if (!complete) {
 			getStatus();
 			get("https://foobar-data.herokuapp.com/", setUpdates);
-		}, 2000);
-		return () => clearInterval(interval);
+
+			const interval = setInterval(() => {
+				getStatus();
+				get("https://foobar-data.herokuapp.com/", setUpdates);
+			}, 2000);
+			return () => clearInterval(interval);
+		}
+
+		if (complete === true) {
+			const emptyOrder = {
+				totalPrice: 0,
+				beers: [],
+				paymentInfo: "",
+				orderInfo: "",
+			};
+
+			setOrder(emptyOrder);
+			setCartStatus(false);
+			setCartStage("current order");
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [status, updates]);
 
@@ -65,7 +81,8 @@ export default function CartGetOrder({ order, facts, setCartStage, setOrder, set
 				console.log("beers to serve", beerAmount);
 			}
 
-			if (status === "In Queue") {
+			if (status === "Serving") {
+			} else if (status === "In Queue") {
 				const beersInFront = [...updates.queue].slice(0, queueNum - 1);
 
 				let count = 0;
@@ -73,11 +90,6 @@ export default function CartGetOrder({ order, facts, setCartStage, setOrder, set
 					count = count + entry.order.length;
 				});
 				setQueue(count);
-				console.log("beers in front", queueAmount);
-			}
-
-			if (status === "Serving") {
-				console.log(totalBeers);
 			}
 
 			setTotal(queueAmount + beerAmount);
@@ -88,17 +100,7 @@ export default function CartGetOrder({ order, facts, setCartStage, setOrder, set
 
 	function resetOrder() {
 		console.log("order reset");
-		const emptyOrder = {
-			totalPrice: 0,
-			beers: [],
-			paymentInfo: "",
-			orderInfo: "",
-		};
-
-		setOrder(emptyOrder);
-		setCartStatus(false);
-
-		setTimeout(setCartStage("current order"), 500);
+		setComplete(true);
 	}
 
 	return (
@@ -117,10 +119,7 @@ export default function CartGetOrder({ order, facts, setCartStage, setOrder, set
 				{status === "Serving" ? <p>{statusServing}</p> : null}
 				{status === "Ready" ? <p>{statusReady}</p> : null}
 
-				{status !== "Ready" && Math.floor((totalBeers * 25) / 60) < 1 ? <h3>ETA: less than a minute</h3> : null}
-				{status !== "Ready" && Math.floor((totalBeers * 25) / 60) > 1 ? (
-					<h3>ETA: ~{Math.floor((totalBeers * 25) / 60)} min</h3>
-				) : null}
+				{status !== "Ready" ? <h3>ETA: ~{Math.floor((totalBeers * 25) / 60)} min</h3> : null}
 			</div>
 			{status !== "Ready" ? <div className="loading-icon-stage"></div> : null}
 

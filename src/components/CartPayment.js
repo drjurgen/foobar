@@ -57,7 +57,15 @@ export default function Payment({ cartStage, setCartStage, postOrder, order, set
 						setOrder={setOrder}
 					/>
 				) : null}
-				{paymentMethod === "mobilepay" ? <CartPayMPay cartStage={cartStage} setCartStage={setCartStage} /> : null}
+				{paymentMethod === "mobilepay" ? (
+					<CartPayMPay
+						setCartStage={setCartStage}
+						setPayment={setPayment}
+						postOrder={postOrder}
+						order={order}
+						setOrder={setOrder}
+					/>
+				) : null}
 
 				{paymentMethod === "payment-method" ? (
 					<div className="stage-actions">

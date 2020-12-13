@@ -1,0 +1,96 @@
+.mobilepay-container {
+	display: grid;
+	grid-template-rows: 55% auto;
+	align-items: start;
+
+	.mobilepay-logo {
+		background-image: url("../../imgs/mpay.png");
+		background-size: 70%;
+		background-repeat: no-repeat;
+		background-position: center;
+		width: 100%;
+		height: 100%;
+	}
+
+	.form-container {
+		width: 100%;
+		height: 100%;
+		display: grid;
+		grid-template-rows: auto;
+		align-items: start;
+
+		.stage-actions {
+			align-self: end;
+		}
+
+		input {
+			appearance: none;
+			-webkit-appearance: none;
+			width: 100%;
+			height: 35px;
+			border-radius: 10px;
+			padding: 0 15px;
+			margin-bottom: 15px;
+			background-size: 20px;
+			background-repeat: no-repeat;
+			background-color: rgba(246, 246, 246, 0.66);
+			border: none;
+			text-transform: uppercase;
+		}
+
+		.error-msg {
+			margin-top: -12px;
+			margin-bottom: 15px;
+			font-size: 13px;
+			text-align: left;
+			color: $secondaryRed;
+
+			animation: error_fade_kf 0.6s ease-out 1 forwards;
+		}
+
+		@keyframes error_fade_kf {
+			0% {
+				opacity: 0;
+				transform: translateY(-5px);
+			}
+
+			100% {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+	}
+
+	.mobilepay-info {
+		.mobilepay-text {
+			color: #6081ff;
+			margin-bottom: 20px;
+		}
+
+		p {
+			margin-top: 6px;
+		}
+	}
+
+	.count-container {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.circle {
+			width: 50vw;
+			height: 50vw;
+			border-radius: 50%;
+			border: 7px solid $primaryBlue;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			h2 {
+				color: $primaryBlue;
+			}
+		}
+	}
+}

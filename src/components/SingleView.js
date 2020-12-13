@@ -5,7 +5,7 @@ export default function SingleView({ showBeer, info, order, setOrder }) {
 	const orderState = { ...order };
 
 	// add beer to cart
-	function addToCart() {
+	function addToCart(event) {
 		if (orderAmount > 0) {
 			// prevent adding "0" amount of beers to cart
 			const addBeers = {
@@ -23,9 +23,19 @@ export default function SingleView({ showBeer, info, order, setOrder }) {
 				orderState.beers.push(addBeers);
 			}
 
-			setOrder(orderState); // call setOrder function in App-component
-			setAmount(1);
-			showBeer();
+			event.target.className = "add add-animation";
+			event.target.disabled = true;
+
+			setTimeout(() => {
+				event.target.className = "add";
+				event.target.disabled = false;
+			}, 750);
+
+			setTimeout(() => {
+				setOrder(orderState); // call setOrder function in App-component
+				setAmount(1);
+				showBeer();
+			}, 1100);
 		}
 	}
 
@@ -49,8 +59,7 @@ export default function SingleView({ showBeer, info, order, setOrder }) {
 
 	const imgSource = require("../beer_imgs/" + info.label);
 	const beerImg = {
-		backgroundImage: `linear-gradient(180deg, rgba(250, 250, 250, 0) 0%, rgba(250, 250, 250, 0) 0.01%, #fff 95.4%), url(${imgSource.default})`,
-		// backgroundImage: `url(${imgSource.default})`,
+		backgroundImage: `linear-gradient(180deg, rgba(250, 250, 250, 0) 0.1%, #fff 95.4%), url(${imgSource.default})`,
 	};
 
 	return (

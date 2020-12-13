@@ -141,6 +141,14 @@
 				transition: 0.4s all ease-out;
 			}
 
+			.add-animation {
+				transform-origin: center;
+				background-color: $secondaryGreen;
+				transform: scale(1.1);
+				background-size: 45%;
+				background-image: url("../../imgs/check.svg");
+			}
+
 			.add:focus {
 				outline: none;
 			}
