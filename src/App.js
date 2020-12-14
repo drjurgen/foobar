@@ -48,10 +48,6 @@ function App() {
 					value: 30,
 					writable: true,
 				});
-
-				// if (beer.category === "IPA" || beer.alc > 6) {
-				// 	beer.price = 35;
-				// }
 			});
 			setBeerTypes(data);
 		}

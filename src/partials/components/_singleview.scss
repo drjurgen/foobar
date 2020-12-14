@@ -137,14 +137,14 @@
 				background-position: center;
 				background-size: 20px;
 				background-repeat: no-repeat;
-				transition: 0.4s all ease-out;
+				transition: 0.2s all ease-out;
 			}
 
 			.add-animation {
 				transform-origin: center;
 				background-color: $secondaryGreen;
 				transform: scale(1.1);
-				background-size: 30px;
+				background-size: 25px;
 				background-image: url("../../imgs/check.svg");
 			}
 

@@ -9,6 +9,7 @@ export function Beer({ beerInfo, showBeer, order, setOrder }) {
 	};
 
 	const [orderAmount, setAmount] = useState(1);
+	const [maxMsg, setMaxMsg] = useState(false);
 
 	function passToMain() {
 		showBeer(beerInfo);
@@ -42,7 +43,7 @@ export function Beer({ beerInfo, showBeer, order, setOrder }) {
 			setTimeout(() => {
 				event.target.className = "add";
 				event.target.disabled = false;
-			}, 750);
+			}, 550);
 		}
 	}
 
@@ -60,8 +61,21 @@ export function Beer({ beerInfo, showBeer, order, setOrder }) {
 
 	// set order amount to number typed
 	function inputAmount(event) {
-		console.log(event.target.value);
-		setAmount(event.target.value);
+		if (isNaN(event.target.value)) {
+			console.log("not a number");
+			event.target.value = "";
+		} else {
+			if (event.target.value > 25) {
+				setMaxMsg(true);
+				event.target.value = 25;
+			}
+			console.log(event.target.value);
+			setAmount(event.target.value);
+		}
+	}
+
+	function hideMax() {
+		setMaxMsg(false);
 	}
 
 	return (
@@ -82,9 +96,25 @@ export function Beer({ beerInfo, showBeer, order, setOrder }) {
 					</button>
 				</div>
 
+				{maxMsg ? (
+					<p className="max-ani" onAnimationEnd={hideMax}>
+						max amount is 25 beers
+					</p>
+				) : null}
+
 				<div className="add-to-cart">
 					<div className="beer-amount">
-						<input type="number" min="0" value={orderAmount} onInput={inputAmount} />
+						<form>
+							<input
+								inputMode="numeric"
+								type="text"
+								min="0"
+								max={25}
+								maxLength={2}
+								value={orderAmount}
+								onInput={inputAmount}
+							/>
+						</form>
 						<button className="minus" onClick={minusAmount}></button>
 						<button className="plus" onClick={plusAmount}></button>
 					</div>

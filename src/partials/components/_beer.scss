@@ -72,6 +72,29 @@
 			}
 		}
 
+		.max-ani {
+			color: $secondaryRed;
+			animation: max_ani_kf 3s ease-in-out 1 forwards;
+		}
+
+		@keyframes max_ani_kf {
+			0% {
+				opacity: 0;
+				transform: translateY(5px);
+			}
+
+			25%,
+			90% {
+				opacity: 1;
+				transform: translateY(0);
+			}
+
+			100% {
+				opacity: 0;
+				transform: translateY(-5px);
+			}
+		}
+
 		.add-to-cart {
 			align-self: end;
 
@@ -138,14 +161,14 @@
 				background-size: 32%;
 				background-repeat: no-repeat;
 
-				transition: 0.4s all ease-out;
+				transition: 0.2s all ease-out;
 			}
 
 			.add-animation {
 				transform-origin: center;
 				background-color: $secondaryGreen;
 				transform: scale(1.1);
-				background-size: 45%;
+				background-size: 40%;
 				background-image: url("../../imgs/check.svg");
 			}
 

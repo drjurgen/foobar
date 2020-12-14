@@ -35,7 +35,7 @@ export default function SingleView({ showBeer, info, order, setOrder }) {
 				setOrder(orderState); // call setOrder function in App-component
 				setAmount(1);
 				showBeer();
-			}, 1100);
+			}, 600);
 		}
 	}
 

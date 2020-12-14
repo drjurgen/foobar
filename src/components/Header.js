@@ -9,8 +9,7 @@ export default function Header() {
 				</a>
 
 				<div className="search-container">
-					<input placeholder="SEARCH"></input>
-					<div className="search-icon"></div>
+					<p>The place to order beer!</p>
 				</div>
 			</nav>
 		</header>
