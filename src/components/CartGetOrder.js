@@ -40,7 +40,7 @@ export default function CartGetOrder({ order, facts, setCartStage, setOrder, set
 	const queueNum = updates.queue.findIndex((entry) => entry.id === doneOrder.orderInfo.id) + 1;
 	const bartender = updates.bartenders.find((entry) => entry.servingCustomer === doneOrder.orderInfo.id);
 
-	const statusQueue = `Your order is currently number ${queueNum} in queue right now. Check back later for status updates.`;
+	const statusQueue = `Your order is currently number #${queueNum} in queue right now. Check back later for status updates.`;
 	const statusServing = `Your order is currently getting prepared by ${
 		bartender !== undefined ? bartender.name : "our lovely bartenders"
 	}. Check back later for status updates.`;

@@ -24,6 +24,12 @@ export default function CartPayMPay({ setCartStage, setPayment, postOrder, order
 		console.log(errors);
 	}
 
+	function checkInput(event) {
+		if (isNaN(event.target.value)) {
+			event.target.value = "";
+		}
+	}
+
 	function onSubmit(data) {
 		console.log(data);
 		setPaid(true);
@@ -44,8 +50,8 @@ export default function CartPayMPay({ setCartStage, setPayment, postOrder, order
 				<>
 					<div className="mobilepay-logo fade-in"></div>
 
-					<form className="form-container fade-in" onSubmit={handleSubmit(onSubmit, onError)}>
-						<div className="input-container">
+					<form className="form-container" onSubmit={handleSubmit(onSubmit, onError)}>
+						<div className="input-container fade-in">
 							<input
 								name="cardName"
 								type="text"
@@ -58,6 +64,7 @@ export default function CartPayMPay({ setCartStage, setPayment, postOrder, order
 							{errors.cardName && <p className="error-msg">{errors.cardName.message}</p>}
 
 							<input
+								onInput={checkInput}
 								inputMode="numeric"
 								name="phone"
 								type="tel"

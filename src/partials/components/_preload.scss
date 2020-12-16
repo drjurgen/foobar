@@ -1,5 +1,13 @@
 @import "../vars";
 
+.beer-preload:nth-child(2) {
+	animation-delay: 0.3s;
+}
+
+.beer-preload:last-child {
+	animation-delay: 0.6s;
+}
+
 .beer-preload {
 	width: 100%;
 	height: 33vh;
@@ -9,8 +17,21 @@
 
 	display: grid;
 	grid-template-columns: 35% auto;
-	margin-bottom: 20px;
+	margin-bottom: 25px;
 	box-shadow: 10px 18px 30px rgba(0, 0, 0, 0.04);
+	animation: fade_skeleton 0.6s ease-out 1 both;
+
+	@keyframes fade_skeleton {
+		0% {
+			opacity: 0;
+			transform: translateY(10px);
+		}
+
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
 
 	.preload-img {
 		align-self: stretch;

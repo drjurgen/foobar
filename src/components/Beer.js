@@ -69,8 +69,17 @@ export function Beer({ beerInfo, showBeer, order, setOrder }) {
 				setMaxMsg(true);
 				event.target.value = 25;
 			}
+
+			let input;
+
+			if (event.target.value === "") {
+				input = "";
+			} else {
+				input = Number.parseInt(event.target.value, 10);
+			}
+
 			console.log(event.target.value);
-			setAmount(event.target.value);
+			setAmount(input);
 		}
 	}
 

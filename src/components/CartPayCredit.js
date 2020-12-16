@@ -1,15 +1,7 @@
 import React, { useState } from "react"; // import React
 import CartPayCreditForm from "./CartPayCreditForm"; // import form component
 
-export default function CartPayCredit({
-	cartStage,
-	setCartStage,
-	postOrder,
-	paymentMethod,
-	setPayment,
-	order,
-	setOrder,
-}) {
+export default function CartPayCredit({ setCartStage, postOrder, paymentMethod, setPayment, order, setOrder }) {
 	const [name, setName] = useState("Your name here");
 	const [cardNumber, setCardNumber] = useState("");
 	const [atCVC, setAtCVC] = useState(false);
@@ -26,6 +18,12 @@ export default function CartPayCredit({
 	}
 
 	function getCardNumber(event) {
+		if (isNaN(event.target.value)) {
+			event.target.value = "";
+		}
+
+		// Formatting credit card with spaces blackboxed with use of regex
+		// https://stackoverflow.com/a/59339120
 		function formatCardNumber(value) {
 			const regex = /^(\d{0,4})(\d{0,4})(\d{0,4})(\d{0,4})$/g;
 			const onlyNumbers = value.replace(/[^\d]/g, "");
@@ -43,14 +41,23 @@ export default function CartPayCredit({
 	}
 
 	function getCVC(event) {
+		if (isNaN(event.target.value)) {
+			event.target.value = "";
+		}
 		setCVC(event.target.value);
 	}
 
 	function getMonth(event) {
+		if (isNaN(event.target.value)) {
+			event.target.value = "";
+		}
 		setMonth(event.target.value);
 	}
 
 	function getYear(event) {
+		if (isNaN(event.target.value)) {
+			event.target.value = "";
+		}
 		setYear(event.target.value);
 	}
 
