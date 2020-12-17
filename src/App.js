@@ -40,7 +40,7 @@ function App() {
 	}
 
 	useEffect(() => {
-		// get("https://foobar-data.herokuapp.com/", setFacts);
+		get("https://foobar-data.herokuapp.com/", setFacts);
 		get("https://foobar-data.herokuapp.com/beertypes", setBeerPrice);
 		function setBeerPrice(data) {
 			data.forEach((beer) => {

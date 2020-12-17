@@ -59,7 +59,7 @@ export default function CartItem({ beer, order, setOrder, deleteItem }) {
 			<div className="col-left">
 				<h3>{beer.name}</h3>
 				<div className="beer-amount">
-					<input type="number" min="0" value={item.amount} onInput={inputAmount} />
+					<input type="number" min="0" inputMode="numeric" value={item.amount} onInput={inputAmount} />
 					<button className="minus" onClick={minusAmount}></button>
 					<button className="plus" onClick={plusAmount}></button>
 				</div>
